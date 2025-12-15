@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Color Pick</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="brand">
+        <span class="dot"></span>
+        <span class="title">Color Pick</span>
+      </div>
+      <div class="actions">
+        <button class="icon-btn" id="btn-clear-history" title="Clear history">🧹</button>
+        <button class="icon-btn" id="btn-open-options" title="About">❔</button>
+      </div>
+    </header>
+
+    <section class="picker">
+      <button id="pick-btn" class="pick-btn">🎯 Pick Color</button>
+      <div id="status" class="status" aria-live="polite"></div>
+    </section>
+
+    <section class="current" id="current-section" hidden>
+      <div class="preview" id="preview"></div>
+      <div class="values">
+        <div class="value-row">
+          <span class="label">HEX</span>
+          <span class="code" id="hex-code">#000000</span>
+          <button class="copy" data-target="hex">Copy</button>
+        </div>
+        <div class="value-row">
+          <span class="label">RGB</span>
+          <span class="code" id="rgb-code">rgb(0, 0, 0)</span>
+          <button class="copy" data-target="rgb">Copy</button>
+        </div>
+        <div class="value-row">
+          <span class="label">HSL</span>
+          <span class="code" id="hsl-code">hsl(0, 0%, 0%)</span>
+          <button class="copy" data-target="hsl">Copy</button>
+        </div>
+      </div>
+      <div class="current-actions">
+        <button id="save-to-palette" class="secondary">⭐ Save to Palette</button>
+      </div>
+    </section>
+
+    <section class="history">
+      <h2>Recent</h2>
+      <div id="history" class="swatches"></div>
+    </section>
+
+    <section class="palette">
+      <h2>Palette</h2>
+      <div id="palette" class="swatches"></div>
+      <div class="palette-actions">
+        <button id="clear-palette" class="secondary">Clear Palette</button>
+      </div>
+    </section>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
