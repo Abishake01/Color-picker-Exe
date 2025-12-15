@@ -61,6 +61,26 @@ function init() {
   bootstrap();
 }
 
+function sendMessage(message) {
+  return new Promise((resolve, reject) => {
+    try {
+      const cb = (resp) => {
+        const err = chrome.runtime.lastError;
+        if (err) return reject(new Error(err.message));
+        resolve(resp);
+      };
+      if (chrome && chrome.runtime && chrome.runtime.id) {
+        chrome.runtime.sendMessage(chrome.runtime.id, message, cb);
+      } else {
+        // Fallback: attempt without ID (works in extension pages)
+        chrome.runtime.sendMessage(message, cb);
+      }
+    } catch (e) {
+      reject(e);
+    }
+  });
+}
+
 async function bootstrap() {
   const st = await chrome.storage.local.get([STORAGE_KEYS.last, STORAGE_KEYS.history, STORAGE_KEYS.palette]);
   const last = st[STORAGE_KEYS.last];
@@ -74,7 +94,7 @@ async function bootstrap() {
 async function onPick() {
   els.status.textContent = 'Picking… click anywhere on the page';
   try {
-    const resp = await chrome.runtime.sendMessage({ type: 'PICK_COLOR' });
+    const resp = await sendMessage({ type: 'PICK_COLOR' });
     if (!resp || !resp.ok) {
       if (resp && resp.error === 'AbortError') {
         els.status.textContent = 'Cancelled';
