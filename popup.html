@@ -8,44 +8,72 @@
 </head>
 <body>
   <div class="app">
-    <header class="header">
+    <header class="header header--enhanced">
       <div class="brand">
-        <span class="dot"></span>
+        <span class="brand-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="2" width="8" height="8" rx="2" fill="#FFB020"/>
+            <rect x="14" y="2" width="8" height="8" rx="2" fill="#6AD3BA"/>
+            <rect x="2" y="14" width="8" height="8" rx="2" fill="#7C5CFF"/>
+            <rect x="14" y="14" width="8" height="8" rx="2" fill="#FF5D5D"/>
+          </svg>
+        </span>
         <span class="title">Color Pick</span>
       </div>
       <div class="actions">
+        <button class="icon-btn" id="theme-toggle" title="Toggle theme">🌙</button>
         <button class="icon-btn" id="btn-clear-history" title="Clear history">🧹</button>
         <button class="icon-btn" id="btn-open-options" title="About">❔</button>
       </div>
     </header>
 
-    <section class="picker">
-      <button id="pick-btn" class="pick-btn">🎯 Pick Color</button>
+    <section class="picker picker--enhanced">
+      <button id="pick-btn" class="pick-btn pick-btn--large">
+        <span class="pipette" aria-hidden="true">🖌️</span>
+        <span>Pick Color</span>
+      </button>
       <div id="status" class="status" aria-live="polite"></div>
     </section>
 
-    <section class="current" id="current-section" hidden>
+    <section class="card" aria-label="Color Picker Controls">
+      <div class="card-title">Color Picker</div>
+      <canvas id="hue-bar" class="hue-bar" width="320" height="22"></canvas>
+      <canvas id="sv-panel" class="sv-panel" width="320" height="150"></canvas>
+      <input id="hex-input" class="hex-input" spellcheck="false" autocomplete="off" value="#3B82F6" />
+    </section>
+
+    <section class="current card" id="current-section" hidden>
       <div class="preview" id="preview"></div>
       <div class="values">
         <div class="value-row">
           <span class="label">HEX</span>
           <span class="code" id="hex-code">#000000</span>
-          <button class="copy" data-target="hex">Copy</button>
+          <button class="copy" data-target="hex" title="Copy HEX">Copy</button>
         </div>
         <div class="value-row">
           <span class="label">RGB</span>
           <span class="code" id="rgb-code">rgb(0, 0, 0)</span>
-          <button class="copy" data-target="rgb">Copy</button>
+          <button class="copy" data-target="rgb" title="Copy RGB">Copy</button>
         </div>
         <div class="value-row">
           <span class="label">HSL</span>
           <span class="code" id="hsl-code">hsl(0, 0%, 0%)</span>
-          <button class="copy" data-target="hsl">Copy</button>
+          <button class="copy" data-target="hsl" title="Copy HSL">Copy</button>
         </div>
       </div>
       <div class="current-actions">
         <button id="save-to-palette" class="secondary">⭐ Save to Palette</button>
       </div>
+    </section>
+
+    <section class="card" aria-label="Generate Palette">
+      <div class="card-title">Generate Palette</div>
+      <div class="gen-actions">
+        <button id="show-color" class="chip"></button>
+        <button id="btn-gen-mono" class="secondary">Monochromatic</button>
+        <button id="btn-gen-comp" class="secondary">Complementary</button>
+      </div>
+      <div id="gen-swatches" class="swatches"></div>
     </section>
 
     <section class="history">
