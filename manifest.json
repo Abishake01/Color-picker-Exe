@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Color Pick – Instant Eyedropper",
+  "version": "1.0.0",
+  "description": "Pick colors from any webpage instantly using the native EyeDropper API. Shows HEX, RGB, HSL with one-click copy, history, and a simple palette.",
+  "action": {
+    "default_title": "Color Pick",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {}
+}

@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Color Pick</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <svg class="brand-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="3" width="8" height="8" rx="2" fill="#FF4D4F"/>
+          <rect x="13" y="3" width="8" height="8" rx="2" fill="#9254DE"/>
+          <rect x="3" y="13" width="8" height="8" rx="2" fill="#40A9FF"/>
+          <rect x="13" y="13" width="8" height="8" rx="2" fill="#52C41A"/>
+        </svg>
+        <span class="title">Color Picker</span>
+      </div>
+      <div class="toolbar">
+        <button class="icon-btn" id="btn-clear-history" title="Clear history">🧹</button>
+        <button id="pick-btn" class="cta">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7.5 14.5L15.5 6.5L18 9L10 17H7V14.5Z" fill="white"/>
+            <path d="M16.5 5.5L18.5 3.5C19.33 2.67 20.67 2.67 21.5 3.5C22.33 4.33 22.33 5.67 21.5 6.5L19.5 8.5L16.5 5.5Z" fill="white"/>
+          </svg>
+          <span>Pick Color</span>
+        </button>
+        <button class="icon-btn" id="btn-open-options" title="About">❔</button>
+      </div>
+    </header>
+
+    <section class="panel">
+      <div class="panel-title">Color Picker</div>
+      <div class="sb-wrap" id="sb-wrap">
+        <div class="sb" id="sb"></div>
+        <div class="sb-cursor" id="sb-cursor"></div>
+      </div>
+      <div class="hue-wrap">
+        <input type="range" min="0" max="360" value="210" id="hue" class="hue"/>
+      </div>
+      <div class="hex-input">
+        <input id="hex-input" type="text" value="#3B82F6" aria-label="Hex color" />
+      </div>
+      <div class="kv">
+        <div class="kv-row">
+          <span>HEX:</span>
+          <span class="code" id="hex-code">#3B82F6</span>
+          <button class="copy" data-target="hex" title="Copy">📋</button>
+        </div>
+        <div class="kv-row">
+          <span>RGB:</span>
+          <input class="n" id="rgb-r" type="number" min="0" max="255" value="59">
+          <input class="n" id="rgb-g" type="number" min="0" max="255" value="130">
+          <input class="n" id="rgb-b" type="number" min="0" max="255" value="246">
+          <button class="copy" data-target="rgb" title="Copy">📋</button>
+        </div>
+        <div class="kv-row">
+          <span>HSL:</span>
+          <span class="code" id="hsl-code">217°, 70%, 50%</span>
+          <button class="copy" data-target="hsl" title="Copy">📋</button>
+        </div>
+      </div>
+      <div id="status" class="status" aria-live="polite"></div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-title">Generate Palette</div>
+      <div class="current-chip" id="current-chip">#3B82F6</div>
+      <div class="gen-actions">
+        <button id="btn-mono" class="secondary">Monochromatic</button>
+        <button id="btn-comp" class="secondary">Complementary</button>
+      </div>
+      <div class="swatches" id="gen-swatches"></div>
+    </section>
+
+    <section class="current" id="current-section" hidden>
+      <div class="preview" id="preview"></div>
+      <div class="values">
+        <div class="value-row">
+          <span class="label">HEX</span>
+          <span class="code" id="hex-code-legacy">#000000</span>
+          <button class="copy" data-target="hex" title="Copy">Copy</button>
+        </div>
+        <div class="value-row">
+          <span class="label">RGB</span>
+          <span class="code" id="rgb-code">rgb(0, 0, 0)</span>
+          <button class="copy" data-target="rgb" title="Copy">Copy</button>
+        </div>
+        <div class="value-row">
+          <span class="label">HSL</span>
+          <span class="code" id="hsl-code-legacy">hsl(0, 0%, 0%)</span>
+          <button class="copy" data-target="hsl" title="Copy">Copy</button>
+        </div>
+      </div>
+      <div class="current-actions">
+        <button id="save-to-palette" class="secondary">⭐ Save to Palette</button>
+      </div>
+    </section>
+
+    <section class="history">
+      <h2>Recent</h2>
+      <div id="history" class="swatches"></div>
+    </section>
+
+    <section class="palette">
+      <h2>Palette</h2>
+      <div id="palette" class="swatches"></div>
+      <div class="palette-actions">
+        <button id="clear-palette" class="secondary">Clear Palette</button>
+      </div>
+    </section>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
